@@ -60,17 +60,19 @@ body {
 
 .square {
   background: #fff;
-  border: 2px solid #999;
+  border-radius: 10px;
+  /* border: 2px solid #999; */
   float: left;
   font-size: 84px;
   font-weight: bold;
-  line-height: 34px;
+  line-height: 144px;
   height: 150px;
-  margin-right: -1px;
-  margin-top: -1px;
+  margin: 5px;
   padding: 0;
   text-align: center;
   width: 150px;
+  text-align: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .board-row:after {
