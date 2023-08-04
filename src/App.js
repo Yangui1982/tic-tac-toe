@@ -9,6 +9,8 @@ function Square({ value, onSquareClick }) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
+  const [player1Name, setPlayer1Name] = useState('');
+  const [player2Name, setPlayer2Name] = useState('');
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -25,14 +27,35 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Vainqueur : ' + (winner === 'X' ? player1Name : player2Name);
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Au tour de : ' + (xIsNext ? player1Name : player2Name);
   }
 
   return (
     <>
+      <div className='joueurs'>
+        <label>
+          Joueur 1 :
+          <input
+            type="text"
+            value={player1Name}
+            onChange={(e) => setPlayer1Name(e.target.value)}
+          />
+        </label>
+        <label>
+          Joueur 2 :
+          <input
+            type="text"
+            value={player2Name}
+            onChange={(e) => setPlayer2Name(e.target.value)}
+          />
+        </label>
+      </div>
+      <br></br>
       <div className="status">{status}</div>
+      <br></br>
+      <div className='planche'>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -47,6 +70,7 @@ function Board({ xIsNext, squares, onPlay }) {
         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </div>
       </div>
     </>
   );
@@ -71,9 +95,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move ' + move;
+      description = 'Aller au coup ' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Aller au début de la partie';
     }
     return (
       <li key={move}>
